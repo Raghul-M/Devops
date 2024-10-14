@@ -1,5 +1,5 @@
 # Continuous Integration and Continuous Delivery
-
+![64413537f97faec15d7cd2da_60d315cb607a32718b6e86c3_CICD pipelines work](https://github.com/user-attachments/assets/7508fdf0-cd3c-4792-bcc8-e6f54f48fa49)
 ### Continuous Integration (CI)
 - **Build → Test**  
   This process involves automatically building the application and running tests every time code is committed.
@@ -15,6 +15,7 @@
 ---
 
 # Jenkins 
+![Jenkins_logo_with_title svg](https://github.com/user-attachments/assets/36239b1a-a3b9-47d1-810b-d270637c6605)
 
 Jenkins is a popular open-source CI/CD tool used to run CI/CD pipelines.
 
