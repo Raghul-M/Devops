@@ -1,6 +1,6 @@
 # Networking
 
-
+![image (6)](https://github.com/user-attachments/assets/07210b84-cb56-4f6e-94b3-1e6da7ade440)
 
 Networking refers to the practice of connecting computers and other devices to share resources (like files, internet access, or applications) and communicate with each other. Networking can be as simple as connecting two computers at home or as complex as connecting millions of devices globally, as seen with the internet.
 
@@ -8,14 +8,12 @@ Networking refers to the practice of connecting computers and other devices to s
 
 
 - **LAN (Local Area Network):** A network within a small geographic area (e.g., home, office).
-<br>
 - **WAN (Wide Area Network):** A network that spans a large geographic area (e.g., the internet).
-<br>
 - **MAN (Metropolitan Area Network):** A network that covers a city or large campus.
 
 
 
-#### 📌  Networking Devices
+### 📌  Networking Devices
 
 - Router: For directing traffic between networks.
 - Switch: For connecting devices within the same network.
@@ -54,7 +52,7 @@ An IP address is a unique identifier assigned to each device connected to a netw
     - IP Address Length: An IPv4 address has a total of 32 bits `(4 bytes x 8 bits = 32 bits)`.
     - Octet: Since each octet is a byte (8 bits), it’s also known as an "octet" format.
         - Binary Range: Each octet's maximum value (255) is based on binary representation, where the highest binary value with 8 bits is 11111111, equating to 255 in decimal.
-<br>
+
 - **Why Not a Larger Range `(e.g., 0-1000)` ?**
     
     The 0-255 range is a limitation of the 8-bit structure of each octet in an IPv4 address. Since the standard defines an IP address as 32 bits long (with each segment limited to 8 bits), the 0-255 range is fixed. Increasing the range would mean changing the underlying protocol, which would disrupt compatibility and require a global overhaul.
@@ -71,8 +69,6 @@ To address the limitations of IPv4, IPv6 was introduced, which uses 128 bits for
 
 ### Subnet
 
-
-
 Subnet is the process of dividing a larger network into smaller, manageable sub-networks (subnets). This is done for several reasons:
 
 - **Security:** Isolating certain parts of a network for additional security (e.g., keeping sensitive data in a separate subnet).
@@ -81,12 +77,9 @@ Subnet is the process of dividing a larger network into smaller, manageable sub-
 
 #### Advantages of Subnetting
 
-
 - **Security:** Helps segment the network into isolated parts, allowing for more control over traffic and improved security policies.
 - **Privacy:** Sensitive or private information can be restricted to a specific subnet.
 - **Isolation:** Prevents unauthorized access between subnets, as they need routing to communicate with each other.
-
-<br>
 
 #### Types of Subnets
 
@@ -94,14 +87,13 @@ Subnet is the process of dividing a larger network into smaller, manageable sub-
     - No direct access to the internet. Used for resources like databases, internal servers, or other services that don’t need to be exposed to the internet.
 2. **Public Subnet:**
     - Has access to the internet. Devices in this subnet can communicate with external services via an internet gateway. Public subnets are typically used for services like web servers, load balancers, or any other services that need to be externally accessible.
-    <br>
-    ```
-    📌 How do Public Subnets Access the Internet?
-    
-    - Public subnets access the internet by routing traffic through an Internet Gateway. This allows devices in the public 
-    subnet to communicate with external networks.
-   ```
-<br>
+
+```
+📌 How do Public Subnets Access the Internet?
+
+ - Public subnets access the internet by routing traffic through an Internet Gateway.
+   This allows devices in the public subnet to communicate with external networks.
+```
 
 ### Subnetting in Cloud Providers
 
@@ -111,10 +103,8 @@ Subnet is the process of dividing a larger network into smaller, manageable sub-
     - CIDR (Classless Inter-Domain Routing) is used to specify the number of available IP addresses by indicating the number of bits dedicated to the network part of the address.
 - **Private Cloud Providers:** In private cloud environments, platforms like OpenStack or Azure also support subnetting to divide resources effectively.
 
-<br>
 
 #### CIDR Notation and Subnet Sizes
-
 
 CIDR notation uses a slash (/) followed by a number to specify the network's size, determining how many bits are used for the network portion. **For example:**
 
@@ -122,7 +112,6 @@ CIDR notation uses a slash (/) followed by a number to specify the network's siz
 - The number after the slash represents how many bits are allocated to the network portion of the IP address.
 
 #### CIDR and Powers of 2
-
 
 CIDR allows flexible subnetting based on the number of IP addresses you need:
 
@@ -135,7 +124,6 @@ You can calculate the number of IP addresses in a subnet using the formula:
 - `2^(32 - CIDR)` = Number of usable IP addresses.
     - **Example:** For `/24`, it would be `2^(32 - 24)` = `256` IP addresses.
     - For `/16`, it would be `2^(32 - 16)` = `65,536` IP addresses.
-<br>
 
 #### 📌  Private IP Address Ranges
 
@@ -143,10 +131,8 @@ You can calculate the number of IP addresses in a subnet using the formula:
     - `10.0.0.0` to `10.255.255.255` **(CIDR: 10.0.0.0/8)**
     - `172.16.0.0` to `172.31.255.255` **(CIDR: 172.16.0.0/12)**
     - `192.168.0.0` to `192.168.255.255` **(CIDR: 192.168.0.0/16)**
-</aside>
 
 ##### Subnetting Example:
-
 
 - **IP Range:** `172.16.0.0` **to** `172.16.255.255`
     - **CIDR**: `172.16.0.0/16`
@@ -155,19 +141,16 @@ You can calculate the number of IP addresses in a subnet using the formula:
     
 The IP range for `172.16.0.0/16` will be from `172.16.0.0` to `172.16.255.255`, which gives us **65,536** possible IP addresses.
 
-<br>
 
 #### CIDR Notation Breakdown
 
 - **`1.23.45.6/24` :**
     - The `/24` means the first 24 bits are fixed, and the last 8 bits (the range 0-255 in the last octet) can be assigned to hosts.
     - The network portion is `1.23.45`, and the host portion is the last octet, which can be any value from 0 to 255.
+      
     ```
     Example: 1.23.45.0/24 includes IPs from 1.23.45.0 to 1.23.45.255.
     ```
-<br>
-
-
 ### Ports
 
 - A Port is a unique number used to direct network traffic to specific services or applications running on a device or server. Ports allow devices to handle multiple services using the same IP address but different port numbers.
@@ -183,7 +166,6 @@ The IP range for `172.16.0.0/16` will be from `172.16.0.0` to `172.16.255.255`, 
     
     Each service or application communicates using a specific port number, helping to direct traffic to the right service on the host.
     
-
 ---
 
 ### Prerequisite Steps Before OSI Layer
@@ -194,9 +176,10 @@ Before data travels through the **OSI (Open Systems Interconnection) model**, ce
 
 **1. DNS Resolution** 
 
+![UntitledDiagram](https://github.com/user-attachments/assets/30360a65-ea32-4989-83db-dc63bd334bbb)
+
 
 - **DNS (Domain Name System)**  is like a directory for the internet, where domain names are mapped to IP addresses. **For example** , when you type google.com, the system needs to find the corresponding IP address (e.g., 172.217.11.46) to connect to the Google server.
-<br>
 - **How DNS Works:** 
     - **Local Cache:**  The first thing that happens is the local cache is checked on your device. If you've visited the website before, the corresponding IP address might already be stored locally, so it doesn't need to be looked up again.
     - **DNS Server Check:**  If the address isn't found in the cache, the router will send a request to the DNS server (usually provided by your Internet Service Provider or ISP). This server holds a database of domain names and their corresponding IP addresses.
@@ -205,6 +188,7 @@ Before data travels through the **OSI (Open Systems Interconnection) model**, ce
 
 **2. TCP Handshake** 
 
+![a9f3c622a3b47bb86c9233fbf28b5158](https://github.com/user-attachments/assets/2eb193c4-992b-4447-a73b-8c2d9f837c1b)
 
 
 - **TCP (Transmission Control Protocol)**  is a connection-oriented protocol, meaning that before sending any data, it ensures that both the client and the server are ready to communicate.
@@ -223,6 +207,8 @@ Before data travels through the **OSI (Open Systems Interconnection) model**, ce
 --- 
 
 ### OSI Model: The Journey of Data
+
+![f-gooden_22-01_OSIModel](https://github.com/user-attachments/assets/0e65537d-e31b-4c8e-b0f0-0c16d56201c7)
 
 
 The **OSI (Open Systems Interconnection)** model is a conceptual framework used to understand and standardize the processes involved in network communications. It breaks down the communication process into **7 layers**, each handling specific tasks to ensure smooth communication between devices. Below is an overview of the layers and their functions:
@@ -254,10 +240,9 @@ Examples: SSL/TLS (encryption), JPEG (image format), ASCII (text format).
 Examples: APIs, RPC (Remote Procedure Calls), SQL sessions.
 ```
 
-
-📌 **Note:** The Application, Presentation, and Session Layers are typically handled by browsers and are more transparent to users.
-
-
+```
+📌 Note: The Application, Presentation, and Session Layers are typically handled by browsers and are more transparent to users.
+```
 
 **╰┈➤ Layer 4 - Transport Layer (Data Segmentation and Protocol Identification)**
 
@@ -298,6 +283,7 @@ Examples: Cables (Ethernet, fiber optics), wireless transmission,electrical sign
 ---
 
 #### TCP/IP Model (A Simplified Version of OSI)
+![image](https://github.com/user-attachments/assets/aa10e11e-b525-4d4b-a1d0-a0eeb7258d66)
 
 The TCP/IP model is another conceptual framework, and it is more commonly used in practical networking than the OSI model. The TCP/IP model simplifies the OSI model by combining the Application, Presentation, and Session layers into a single layer called the Application Layer.
 
