@@ -305,6 +305,7 @@ It is an open-source platform tool designed to manage the containers, which allo
   - **Examples**: Contains images for different versions of an application.
   - **Usage**: Users pull specific versions of images using tags.
  
+<br>
     
 ### Buildah Tool:
     
@@ -341,264 +342,241 @@ Buildah is a command-line tool used for building Open Container Initiative (OCI)
     
 **Docker Volume**: A Docker volume is a persistent data storage mechanism used to manage data in Docker containers. Volumes enable data to persist even when containers are removed, allowing for data sharing among containers and better data management.
     
-    Create and Use a Volume
+Create and Use a Volume
     
-    - **Run a container with a volume:**
+**Run a container with a volume:**
     
-    ```bash
-    $ docker run -v /opt/datadir:/var/lib/mysql <containername>
-    ```
+```
+$ docker run -v /opt/datadir:/var/lib/mysql <containername>
+```
     
-    **Docker Storage**
+**Docker Storage**
     
-    - Docker uses storage drivers from the OS. By default, all Docker data is stored under:
+  Docker uses storage drivers from the OS. By default, all Docker data is stored under:
     
-    ```bash
-    /var/lib/docker > Volumes > data-volume
-    ```
+```
+ /var/lib/docker > Volumes > data-volume
+```
     
-    **Create a persistent volume:**
+**Create a persistent volume:**
     
-    ```bash
-    $ docker volume create data-volume
-    ```
+```
+$ docker volume create data-volume
+```
     
-    **Attach a Volume (Mounting)**
+**Attach a Volume (Mounting)**
     
-    - **Run a container and attach a volume:**
+ **Run a container and attach a volume:**
     
-    ```bash
-    $ docker run -v data-volume:/var/lib/mysql <containername>
+ ```
+$ docker run -v data-volume:/var/lib/mysql <containername>
+ # If the `data-volume` is not created, it will be created at runtime
+ ```
     
-    *(If the `data-volume` is not created, it will be created at runtime)*
-    ```
+**Bind Mount**
     
-    **Bind Mount**
+**Using a bind mount:**
     
-    - **Using a bind mount:**
+```
+$ docker run -v /data/mysql:/var/lib/mysql mysql
+```
     
-    ```
-    $ docker run -v /data/mysql:/var/lib/mysql mysql
-    ```
+**New Way to Use Bind Mount**
     
-    **New Way to Use Bind Mount**
+**Run a container with a bind mount using the `-mount` flag:**
     
-    - **Run a container with a bind mount using the `-mount` flag:**
+```
+ $ docker run \
+   --mount type=bind,source=/data/mysql,target=/var/lib/mysql \
+   mysql
+```
+<br>
     
-    ```bash
-    $ docker run \
-      --mount type=bind,source=/data/mysql,target=/var/lib/mysql \
-      mysql
-    ```
+**Docker Networking:**
     
-- **Docker Networking:**
+**Docker networking** allows containers to communicate with each other and with the host system. There are several network drivers available in Docker:
     
-    **Docker networking** allows containers to communicate with each other and with the host system. There are several network drivers available in Docker:
+    - Bridge: The default network driver for standalone containers.
+    - Host: Removes network isolation between the container and the Docker host.
+    - Overlay: Enables communication between multiple Docker daemons.
+    - Macvlan: Assigns a MAC address to a container, making it appear as a physical device on the network.
+    - None: Disables all networking for the container.
     
-    - **Bridge**: The default network driver for standalone containers.
-    - **Host**: Removes network isolation between the container and the Docker host.
-    - **Overlay**: Enables communication between multiple Docker daemons.
-    - **Macvlan**: Assigns a MAC address to a container, making it appear as a physical device on the network.
-    - **None**: Disables all networking for the container.
+**Bridge Network**
     
-     **Bridge Network**
-    
-    ---
-    
-    - **Definition**: The default network driver. Containers on the same bridge network can communicate with each other.
-    - **Commands**:
-        - **Create a Bridge Network**:
+  **Definition**: The default network driver. Containers on the same bridge network can communicate with each other.
+  **Commands**:
+        **Create a Bridge Network**:
             
-            ```bash
-            $ docker network create --driver bridge my_bridge
-            ```
+   ```bash
+   $ docker network create --driver bridge my_bridge
+   ```
             
-        - **Run a Container on a Bridge Network**
+  **Run a Container on a Bridge Network**
             
-            ```bash
-            $ docker run --network my_bridge --name container1 nginx
-            ```
+  ```bash
+  $ docker run --network my_bridge --name container1 nginx
+  ```
             
-        - **List Networks**:
+  **List Networks**:
             
-            ```bash
-            $ docker network ls
-            ```
+  ```bash
+  $ docker network ls
+  ```
             
-        - **Inspect a Network**:
+  **Inspect a Network**:
             
-            ```bash
-            $ docker network inspect my_bridge
-            ```
+ ```bash
+ $ docker network inspect my_bridge
+ ```
             
-        - **Connect a Running Container to a Network**:
+  **Connect a Running Container to a Network**:
             
-            ```bash
-            $ docker network connect my_bridge container1
-            ```
+ ```bash
+ $ docker network connect my_bridge container1
+ ```
             
-        - **Disconnect a Running Container from a Network**:
+  **Disconnect a Running Container from a Network**:
             
-            ```bash
-            $ docker network disconnect my_bridge container1
-            ```
-            
+  ```bash
+  $ docker network disconnect my_bridge container1
+ ```
     
-     ****
+**Host Network**
     
-    **Host Network**
     
-    ---
-    
-    - **Definition**: The container shares the host’s network stack.
-    - **Commands**:
-        - **Run a Container with Host Network**:
+   **Definition**: The container shares the host’s network stack.
+   **Commands**:
+       **Run a Container with Host Network**:
             
-            ```bash
-            $ docker run --network host --name my_container nginx
-            ```
-            
+```bash
+$ docker run --network host --name my_container nginx
+```
     
-     ****
+**Overlay Network**
     
-    **Overlay Network**
-    
-    ---
-    
-    - **Definition**: Enables swarm services to communicate with each other.
-    - **Commands**:
-        - **Create an Overlay Network**:
+  **Definition**: Enables swarm services to communicate with each other.
+  **Commands**:
+        **Create an Overlay Network**:
             
-            ```bash
-            $ docker network create --driver overlay my_overlay
-            ```
+  ```bash
+  $ docker network create --driver overlay my_overlay
+  ```
+  
+  **Run a Service on an Overlay Network** 
             
-        - **Run a Service on an Overlay Network**:
-            
-            ```bash
-            $ docker service create --name my_service --network my_overlay nginx
-            ```
+  ```bash
+  $ docker service create --name my_service --network my_overlay nginx
+  ```
             
     
-     **Macvlan Network**
+  **Macvlan Network**
     
-    ---
-    
-    - **Definition**: Assigns a MAC address to the container, making it appear as a physical device on the network.
-    - **Commands**:
-        - **Create a Macvlan Network**:
+  **Definition**: Assigns a MAC address to the container, making it appear as a physical device on the network.
+  **Commands**:
+        **Create a Macvlan Network**:
             
-            ```bash
-            $ docker network create -d macvlan \\
+ ```bash
+ $ docker network create -d macvlan \\
               --subnet=192.168.1.0/24 \\
               --gateway=192.168.1.1 \\
               -o parent=eth0 my_macvlan
-            ```
+```
             
-        - **Run a Container on a Macvlan Network**:
+ **Run a Container on a Macvlan Network**:
             
-            ```bash
-            $ docker run --network my_macvlan --name my_container nginx
-            ```
+```bash
+$ docker run --network my_macvlan --name my_container nginx
+```
+  
+**None Network**
+    
+**Definition**: Disables all networking for the container.
+**Commands**:
+      **Run a Container with No Network**:
             
-    
-     
-    
-     **None Network**
-    
-    ---
-    
-    - **Definition**: Disables all networking for the container.
-    - **Commands**:
-        - **Run a Container with No Network**:
-            
-            ```bash
-            $ docker run --network none --name my_container nginx
-            ```
+```bash
+$ docker run --network none --name my_container nginx
+```
             
     
-    ### General Networking Commands
+### General Networking Commands
     
-    - **Remove a Network**:
+**Remove a Network**:
         
-        ```bash
-        $ docker network rm my_network
-        ```
+ ```bash
+ $ docker network rm my_network
+```
+**Prune Unused Networks**:
         
-    - **Prune Unused Networks**:
-        
-        ```bash
-        $ docker network prune
-        ```
-        
+```bash
+$ docker network prune
+```
+----
     
-    ---
+### Docker compose :
     
-- **Docker compose :**
+**Docker Compose** is a tool for defining and running multi-container Docker applications. It uses a YAML file to configure the application’s services, networks, and volumes.
     
-    **Docker Compose** is a tool for defining and running multi-container Docker applications. It uses a YAML file to configure the application’s services, networks, and volumes.
+**Docker Compose Examples :** https://github.com/docker/awesome-compose
+        
+**Basic Commands**
     
-    **Docker Compose Examples :**
-    
-    https://github.com/docker/awesome-compose
-    
-    **Basic Commands**
-    
-    - **Start services defined in a `docker-compose.yml`**:
+**Start services defined in a `docker-compose.yml`**:
         
-        ```bash
-        $ docker-compose up
-        ```
+```bash
+ $ docker-compose up
+```
         
-    - **Start services in detached mode**:
+**Start services in detached mode**:
         
-        ```bash
-        $ docker-compose up -d
-        ```
+```bash
+ $ docker-compose up -d
+ ```
         
-    - **Stop services**:
+**Stop services**:
         
-        ```bash
-        $ docker-compose down
-        ```
+```bash
+$ docker-compose down
+```
         
-    - **Restart services**:
+**Restart services**:
         
-        ```bash
-        $ docker-compose restart
-        ```
+```bash
+$ docker-compose restart
+```
         
-    - **View service logs**:
+**View service logs**:
         
-        ```bash
-        $ docker-compose logs
-        ```
+```bash
+$ docker-compose logs
+```
         
-    - **Build or rebuild services**:
+**Build or rebuild services**:
         
-        ```bash
-        $ docker-compose build
-        ```
+```bash
+$ docker-compose build
+```
         
-    - **List all running services**:
+**List all running services**:
         
-        ```bash
-        $ docker-compose  ps
-        ```
+```bash
+ $ docker-compose  ps
+```
         
     
-    ### Docker Compose File Structure
+### Docker Compose File Structure
     
-    ---
+ ---
     
-    - **`version`**: Specify the Compose file format version.
-    - **`services`**: Define individual services (containers).
-    - **`networks`**: Define custom networks.
-    - **`volumes`**: Define persistent storage volumes.
+  - **`version`**: Specify the Compose file format version.
+  - **`services`**: Define individual services (containers).
+  - **`networks`**: Define custom networks.
+  - **`volumes`**: Define persistent storage volumes.
     
-    ### Example `docker-compose.yml`
+### Example `docker-compose.yml`
     
-    ```yaml
+```yaml
     version: '3.8'
     
     services:
@@ -623,114 +601,107 @@ Buildah is a command-line tool used for building Open Container Initiative (OCI)
     
     volumes:
       data-volume:
-    ```
+```
     
-    ### Key Docker Compose Commands
+### Key Docker Compose Commands
+  
     
-    ---
+**Start a single service**:
+        
+```bash
+$ docker-compose up <service_name>
+```
+        
+**Stop a single service**:
+        
+```bash
+$ docker-compose stop <service_name>
+```
+        
+**Remove a single service's container**:
+        
+```bash
+$ docker-compose rm <service_name>
+```
+        
+**Scale services**:
+        
+```bash
+$ docker-compose up --scale <service_name>=<number>
+```
+---        
     
-    - **Start a single service**:
-        
-        ```bash
-        $ docker-compose up <service_name>
-        ```
-        
-    - **Stop a single service**:
-        
-        ```bash
-        $ docker-compose stop <service_name>
-        ```
-        
-    - **Remove a single service's container**:
-        
-        ```bash
-        $ docker-compose rm <service_name>
-        ```
-        
-    - **Scale services**:
-        
-        ```bash
-        $ docker-compose up --scale <service_name>=<number>
-        ```
-        
+### Environment Variables
     
-    ### Environment Variables
     
-    ---
-    
-    - **Using `.env` file**:
-        - Create a `.env` file:
+**Using `.env` file**:
+      **Create a `.env` file:**
             
-            ```
-            APP_ENV=production
-            DATABASE_URL=mysql://user:pass@db:3306/mydatabase
-            ```
+```
+APP_ENV=production
+DATABASE_URL=mysql://user:pass@db:3306/mydatabase
+```
             
-        - Reference in `docker-compose.yml`:
+Reference in `docker-compose.yml`:
             
-            ```yaml
-            version: '3.8'
+```yaml
+    version: '3.8'
             
-            services:
-              app:
-                image: myapp
-                environment:
-                  - APP_ENV=${APP_ENV}
-                  - DATABASE_URL=${DATABASE_URL}
-            ```
+    services:
+        app:
+           image: myapp
+           environment:
+              - APP_ENV=${APP_ENV}
+              - DATABASE_URL=${DATABASE_URL}
+```
             
+---
+
+### Networking
     
-    ### Networking
-    
-    ---
-    
-    - **Default Network**: Compose automatically creates a default network for your services.
-    - **Custom Networks**:
+  **Default Network**: Compose automatically creates a default network for your services.
+  **Custom Networks**:
         
-        ```yaml
-        networks:
+```yaml
+      networks:
           webnet:
             driver: bridge
-        ```
+```
         
     
-    ### Volumes
+### Volumes
     
-    ---
     
-    - **Named Volumes**:
+  **Named Volumes**:
         
-        ```yaml
+```yaml
         volumes:
           data-volume:
-        ```
+  ```
         
-    - **Mounting Volumes**:
+  **Mounting Volumes**:
         
-        ```yaml
+```yaml
         services:
           db:
             image: mysql
             volumes:
               - data-volume:/var/lib/mysql
-        ```
+```
         
     
-    ### Common Use Cases
+### Common Use Cases
     
-    ---
     
-    - **Running Tests**:
+**Running Tests**:
         
-        ```
-        $ docker-compose run <service_name> <test_command>
-        ```
+```
+$ docker-compose run <service_name> <test_command>
+```
         
-    - **One-off Commands**:
+**One-off Commands**:
         
-        ```
-        $ docker-compose run <service_name> <command>
-        ```
-        
-    
-    ---
+```
+$ docker-compose run <service_name> <command>
+```
+
