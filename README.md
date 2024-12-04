@@ -38,4 +38,3 @@ This repository is open for contributions! If you find any mistakes or want to a
 
 Created by [Raghul M](https://github.com/Raghul-M).
 
-More Docs [Jenkins](https://github.com/Raghul-M/Devops-Hub/blob/main/Jenkins/Readme.md)
