@@ -34,7 +34,7 @@ Welcome to the **DevOps Hub**! This repository contains all of my learning notes
 
 ## Contribute
 
-This repository is open for contributions! If you find any mistakes or want to add more content, feel free to fork the repository and submit a pull request. Your contributions are welcome and appreciated! Refer [CONTRIBUTING.md](CONTRIBUTING.md
+This repository is open for contributions! If you find any mistakes or want to add more content, feel free to fork the repository and submit a pull request. Your contributions are welcome and appreciated! Refer [CONTRIBUTING.md](CONTRIBUTING.md)
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
 
 ## License:
