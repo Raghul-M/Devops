@@ -34,7 +34,10 @@ Welcome to the **DevOps Hub**! This repository contains all of my learning notes
 
 ## Contribute
 
-This repository is open for contributions! If you find any mistakes or want to add more content, feel free to fork the repository and submit a pull request. Your contributions are welcome and appreciated!
+This repository is open for contributions! If you find any mistakes or want to add more content, feel free to fork the repository and submit a pull request. Your contributions are welcome and appreciated! Refer [Contribution.md](Contribution.md)
+Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request.
 
+## License:
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 Created by [Raghul M](https://github.com/Raghul-M).
 
